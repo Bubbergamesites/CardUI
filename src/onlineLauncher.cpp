@@ -476,7 +476,10 @@ bool installFirmwareDynamic(
         prog_handler = 1;
         const uint32_t copySize = dp.copySize > dp.entry.size ? dp.entry.size : dp.copySize;
         progressHandler(0, copySize);
-        if (!flashRawRangeFromHttp(fileAddr, dp.sourceOffset, copySize, dp.entry, false, hwid.c_str())) {
+        // Data that ships as a separate file is fetched from its own URL at its own
+        // source offset; embedded data keeps using the app image URL (fileAddr).
+        const String &partAddr = dp.sourceUrl.isEmpty() ? fileAddr : dp.sourceUrl;
+        if (!flashRawRangeFromHttp(partAddr, dp.sourceOffset, copySize, dp.entry, false, hwid.c_str())) {
             displayRedStripe(String(typeStr) + ": " + launcherUpdateLastErrorName());
             launcherDelayMs(2000);
             goto DONE;
@@ -665,6 +668,19 @@ JsonDocument getVersionInfo(const String &fid) {
     return versions;
 }
 
+// Resolves the HTTP URL a data partition's payload should be fetched from during an
+// OTA install. Returns empty when the payload is embedded in the app image (manifest
+// "source" is "firmware" or absent); otherwise the direct URL of the matching
+// install.sources entry (e.g. a standalone SPIFFS/LittleFS image).
+static String resolveDataPartitionSource(JsonObject part, JsonObject sources) {
+    String src = part["source"].as<String>();
+    if (src.isEmpty() || src == "firmware" || sources.isNull()) return String();
+    String url = sources[src].as<String>();
+    if (url.isEmpty()) return String();
+    if (!url.startsWith("https://")) url = M5_SERVER_PATH + url;
+    return url;
+}
+
 void installFirmwareFromManifest(const String &fid, const String &version, String installedName) {
     displayRedStripe("Getting install info");
 
@@ -681,6 +697,7 @@ void installFirmwareFromManifest(const String &fid, const String &version, Strin
     JsonObject install = versionObj["install"].as<JsonObject>();
     JsonObject app = install["app"].as<JsonObject>();
     JsonArray partitions = install["partitions"].as<JsonArray>();
+    JsonObject sources = install["sources"].as<JsonObject>();
     String file = versionObj["file"].as<String>();
     if (file.isEmpty() || app.isNull()) {
         displayRedStripe("Bad install info");
@@ -709,6 +726,7 @@ void installFirmwareFromManifest(const String &fid, const String &version, Strin
             uint32_t declaredSize = part["size"] | 0;
             dp.sourceOffset = part["source_offset"] | 0;
             dp.copySize = part["copy_size"] | 0;
+            dp.sourceUrl = resolveDataPartitionSource(part, sources);
             dp.label = part["label"].as<String>();
             if (dp.label.isEmpty()) dp.label = "spiffs";
             if (dp.label == "assets" && declaredSize > LAUNCHER_DEFAULT_SPIFFS_SIZE) {
@@ -730,6 +748,7 @@ void installFirmwareFromManifest(const String &fid, const String &version, Strin
             );
             uint32_t declaredSize = part["size"] | 0;
             dp.sourceOffset = part["source_offset"] | 0;
+            dp.sourceUrl = resolveDataPartitionSource(part, sources);
             uint32_t requestedCopySize = part["copy_size"] | 0;
             LauncherPartitionPayloadPlan payload =
                 launcherPartitionFatPayloadPlan(dp.label.c_str(), declaredSize, requestedCopySize);

@@ -14,6 +14,10 @@ struct LauncherInstallDataPartition {
     uint32_t copySize = 0;
     LauncherPartitionEntry entry;
     bool hasEntry = false;
+    // HTTP source for this partition's payload. Empty means it lives inside the app
+    // image (same URL as the firmware); set when the data ships as a separate file
+    // (manifest "source" points to a distinct entry of install.sources).
+    String sourceUrl;
 };
 
 bool launcherPrepareInstallDataPartitions(

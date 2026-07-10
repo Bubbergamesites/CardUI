@@ -655,7 +655,7 @@ void defaultValues() {
     odd_color = 0x4a31;
     even_color = 0x079F;
 #endif
-    dev_mode = true;
+    dev_mode = false;
     wui_usr = "admin";
     wui_pwd = "launcher";
     dwn_path = "/";

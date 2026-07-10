@@ -412,11 +412,11 @@ void setUiColor() {
     options = {
         {"Default",
          [&]() {
-             FGCOLOR = 0x0000;
-             BGCOLOR = 0xffff;
+             FGCOLOR = 0xFFFF;
+             BGCOLOR = 0x0000;
              ALCOLOR = 0x6b6d;
-             odd_color = 0x8c71;
-             even_color = 0xb596;
+             odd_color = 0x630C;
+             even_color = 0x8410;
          }                 },
         {"Red",
          [&]() {
@@ -649,11 +649,11 @@ void defaultValues() {
     odd_color = 0x5555;
     even_color = 0x2222;
 #else
-    FGCOLOR = 0x0000;
-    BGCOLOR = 0xffff;
+    FGCOLOR = 0xFFFF;
+    BGCOLOR = 0x0000;
     ALCOLOR = 0x6b6d;
-    odd_color = 0x8c71;
-    even_color = 0xb596;
+    odd_color = 0x630C;
+    even_color = 0x8410;
 #endif
     dev_mode = false;
     wui_usr = "admin";

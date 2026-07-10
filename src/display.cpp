@@ -101,7 +101,7 @@ void displayScrollingText(const String &text, Opt_Coord &coord) {
     if (len < coord.size) {
         // Text fits within limit, no scrolling needed
         return;
-    } else if (launchermillis() > _lastmillis + deadTime) {
+    } else if (launcherMillis() > _lastmillis + deadTime) {
         String scrollingPart =
             displayText.substring(i, i + (coord.size - 1)); // Display charLimit characters at a time
         tft->fillRect(
@@ -111,9 +111,9 @@ void displayScrollingText(const String &text, Opt_Coord &coord) {
         tft->setCursor(coord.x, coord.y);
         tft->print(scrollingPart);
         if (i >= scrollLen - coord.size) i = -1; // Loop back
-        _lastmillis = launchermillis();
+        _lastmillis = launcherMillis();
         i++;
-        if (i == 1) _lastmillis = launchermillis() + 1000;
+        if (i == 1) _lastmillis = launcherMillis() + 1000;
         tft->display(false);
     }
 }
@@ -181,12 +181,12 @@ void initDisplay(bool doAll) {
 #ifdef E_PAPER_DISPLAY // epaper display draws only once
     static bool runOnce = false;
     static long lastmillis = 0;
-    if (runOnce && launchermillis() - lastmillis < 5000) {
+    if (runOnce && launcherMillis() - lastmillis < 5000) {
         vTaskDelay(50 / portTICK_PERIOD_MS);
         return;
     } else {
         runOnce = true;
-        lastmillis = launchermillis();
+        lastmillis = launcherMillis();
     }
 #endif
 
@@ -477,7 +477,7 @@ void progressHandler(size_t progress, size_t total) {
     size_t barWidth = static_cast<size_t>(barWidthFloat);
     // Serial.printf("Total: %d, Progress: %d, Progress bar width: %d \n", total, progress, barWidth);
     if (progress == 0) {
-        lastProgressDraw = launchermillis();
+        lastProgressDraw = launcherMillis();
         lastProgressBarWidth = 0;
         tft->setTextSize(FM);
         tft->setTextColor(ALCOLOR);

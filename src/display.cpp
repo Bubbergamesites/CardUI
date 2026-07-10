@@ -163,7 +163,7 @@ void TouchFooter2(uint16_t color) {
     tft->setTextColor(color);
     tft->setTextSize(FM);
     tft->drawString("<<", 11 + RES, tftHeight + 4);
-    tft->drawCentreString("LAUNCHER", tftWidth / 2, tftHeight + 4, 1);
+    tft->drawCentreString("CardUI", tftWidth / 2, tftHeight + 4, 1);
     tft->drawRightString(">>", tftWidth - (RES + 11), tftHeight + 4, 1);
 }
 
@@ -248,9 +248,9 @@ void initDisplay(bool doAll) {
     tft->setTextSize(FG);
     tft->setTextColor(FGCOLOR);
 #if TFT_HEIGHT > 200
-    tft->drawCentreString("Launcher", tftWidth / 2, tftHeight / 2 - 10, 1);
+    tft->drawCentreString("CardUI", tftWidth / 2, tftHeight / 2 - 10, 1);
 #else
-    tft->drawCentreString("Launcher", tftWidth / 2, tftHeight / 2 - 10, 1);
+    tft->drawCentreString("CardUI", tftWidth / 2, tftHeight / 2 - 10, 1);
 #endif
     tft->setTextSize(FG);
     tft->setTextColor(FGCOLOR);
@@ -483,9 +483,9 @@ void progressHandler(size_t progress, size_t total) {
         tft->setTextColor(ALCOLOR);
         tft->fillRoundRect(6, 6, tftWidth - 12, tftHeight - 12, 5, BGCOLOR);
 #if TFT_HEIGHT > 200
-        tft->drawCentreString("-=Launcher=-", tftWidth / 2, 20, 1);
+        tft->drawCentreString("-=CardUI=-", tftWidth / 2, 20, 1);
 #else
-        tft->drawCentreString("-=Launcher=-", tftWidth / 2, 10, 1);
+        tft->drawCentreString("-=CardUI=-", tftWidth / 2, 10, 1);
 #endif
         tft->drawRoundRect(5, 5, tftWidth - 10, tftHeight - 10, 5, FGCOLOR);
         if (prog_handler == 1) {
@@ -502,7 +502,7 @@ void progressHandler(size_t progress, size_t total) {
         displayRedStripe(txt);
     }
     if (progress > 0 && progress < total) {
-        unsigned long now = launcherMillis();
+        unsigned long now = Millis();
         if (barWidth == lastProgressBarWidth || now - lastProgressDraw < 80) {
             wakeUpScreen();
             return;
@@ -515,9 +515,9 @@ void progressHandler(size_t progress, size_t total) {
     else tft->fillRect(20, tftHeight - 45, barWidth, 13, FGCOLOR);
 
 #if defined(E_PAPER_DISPLAY) && (defined(GxEPD2_DISPLAY) || defined(USE_M5GFX))
-    if (launcherMillis() - lastUpdate > 2000) {
+    if (Millis() - lastUpdate > 2000) {
         tft->display();
-        lastUpdate = launcherMillis();
+        lastUpdate = Millis();
     }
 #else
     tft->display();
@@ -910,11 +910,11 @@ void drawMainMenu(std::vector<MenuOptions> &opt, int index) {
     // Draw the description of the selected item
     tft->fillRect(10, tftHeight - (6 + LH * FP), tftWidth - 20, LH * FP, BGCOLOR);
     tft->drawCentreString(opt[index].text, tftWidth / 2, tftHeight - (6 + LH * FP), 1);
-    // Draw Launcher version and battery value
+    // Draw  version and battery value
 #if TFT_HEIGHT < 200
-    tft->drawString("Launcher", 12 + RES, 12);
+    tft->drawString("CardUI", 12 + RES, 12);
 #else
-    tft->drawString("Launcher " + String(LAUNCHER), 12 + RES, 12);
+    tft->drawString("CardUI " + String(CARDUI), 12 + RES, 12);
 #endif
     tft->setTextSize(maxIconTextSize);
     drawDeviceBorder();
@@ -938,7 +938,7 @@ void drawWifiStatus(bool hasBattery) {
     int by = 7 + (FP * LH + 9) / 2 + u;
     int dot = u < 2 ? 2 : u;
     tft->fillRect(cx - 3 * u - 1, by - 4 * u - 1, 6 * u + 3, 4 * u + dot + 2, BGCOLOR);
-    if (!launcherWifiIsConnected()) return;
+    if (!WifiIsConnected()) return;
     int thick = size / 8;
     if (thick < 1) thick = 1;
     for (int k = 1; k <= 3; ++k) {
@@ -982,7 +982,7 @@ int loopOptions(std::vector<Option> &options, bool bright, uint16_t al, uint16_t
     std::vector<MenuOptions> list;
     int max_idx = 0;
     int min_idx = 255;
-    LongPressTmp = launcherMillis();
+    LongPressTmp = Millis();
     while (1) {
         if (redraw) {
             list = {};
@@ -1050,9 +1050,9 @@ int loopOptions(std::vector<Option> &options, bool bright, uint16_t al, uint16_t
         if (LongPress || PrevPress) {
             if (!LongPress) {
                 LongPress = true;
-                LongPressTmp = launcherMillis();
+                LongPressTmp = Millis();
             }
-            if (LongPress && launcherMillis() - LongPressTmp < 700) {
+            if (LongPress && Millis() - LongPressTmp < 700) {
                 if (!PrevPress) {
                     AnyKeyPress = false;
                     if (index == 0) index = options.size() - 1;
@@ -1060,17 +1060,17 @@ int loopOptions(std::vector<Option> &options, bool bright, uint16_t al, uint16_t
                     LongPress = false;
                     redraw = true;
                 }
-                if (launcherMillis() - LongPressTmp > 200)
+                if (Millis() - LongPressTmp > 200)
                     tft->drawArc(
                         tftWidth / 2,
                         tftHeight / 2,
                         25,
                         15,
                         0,
-                        360 * (launcherMillis() - (LongPressTmp + 200)) / 500,
+                        360 * (Millis() - (LongPressTmp + 200)) / 500,
                         FGCOLOR - 0x1111
                     );
-                if (launcherMillis() - LongPressTmp > 700) { // longpress detected to exit
+                if (Millis() - LongPressTmp > 700) { // longpress detected to exit
                     LongPress = false;
                     check(PrevPress);
                     exit = true;
@@ -1144,7 +1144,7 @@ void loopVersions(const String &_fid) {
     JsonArray versions = item["versions"];
     bool redraw = true;
 
-    LongPressTmp = launcherMillis();
+    LongPressTmp = Millis();
     while (1) {
         if (returnToMenu) break; // Stops the loop to get back to Main menu
 
@@ -1180,35 +1180,35 @@ void loopVersions(const String &_fid) {
         if (LongPress || PrevPress) {
             if (!LongPress) {
                 LongPress = true;
-                LongPressTmp = launcherMillis();
+                LongPressTmp = Millis();
             }
-            if (LongPress && launcherMillis() - LongPressTmp < 800) {
+            if (LongPress && Millis() - LongPressTmp < 800) {
             WAITING:
                 vTaskDelay(10 / portTICK_PERIOD_MS);
-                if (!PrevPress && launcherMillis() - LongPressTmp < 200) {
+                if (!PrevPress && Millis() - LongPressTmp < 200) {
                     AnyKeyPress = false;
                     if (versionIndex == 0) versionIndex = versions.size() - 1;
                     else if (versionIndex > 0) versionIndex--;
                     LongPress = false;
                     redraw = true;
                 }
-                if (!PrevPress && launcherMillis() - LongPressTmp > 200) {
+                if (!PrevPress && Millis() - LongPressTmp > 200) {
                     check(PrevPress);
                     redraw = true;
                     LongPress = false;
                     goto EXIT_CHECK;
                 }
-                if (launcherMillis() - LongPressTmp > 200)
+                if (Millis() - LongPressTmp > 200)
                     tft->drawArc(
                         tftWidth / 2,
                         tftHeight / 2,
                         25,
                         15,
                         0,
-                        360 * (launcherMillis() - (LongPressTmp + 200)) / 500,
+                        360 * (Millis() - (LongPressTmp + 200)) / 500,
                         FGCOLOR - 0x1111
                     );
-                if (launcherMillis() - LongPressTmp > 700) { // longpress detected to exit
+                if (Millis() - LongPressTmp > 700) { // longpress detected to exit
                     returnToMenu = true;
                     check(PrevPress);
                     goto SAIR;
@@ -1284,7 +1284,7 @@ RESTART:
     if (isUpdate && index > 0) {
         checkForUpdates();
     } else if (_page != current_page || refined) {
-        GetJsonFromLauncherHub(current_page, order_by, star, query);
+        GetJsonFromHub(current_page, order_by, star, query);
         index = 1;
     }
     options = {};

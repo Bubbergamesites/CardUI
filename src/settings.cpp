@@ -649,11 +649,11 @@ void defaultValues() {
     odd_color = 0x5555;
     even_color = 0x2222;
 #else
-    FGCOLOR = 0x07E0;
-    BGCOLOR = 0x0000;
-    ALCOLOR = 0xF800;
-    odd_color = 0x30c5;
-    even_color = 0x32e5;
+    FGCOLOR = 0x0000;
+    BGCOLOR = 0xffff;
+    ALCOLOR = 0x6b6d;
+    odd_color = 0x8c71;
+    even_color = 0xb596;
 #endif
     dev_mode = false;
     wui_usr = "admin";

@@ -412,11 +412,11 @@ void setUiColor() {
     options = {
         {"Default",
          [&]() {
-             FGCOLOR = 0xFFFF;
+             FGCOLOR = 0x94BF;
              BGCOLOR = 0x0000;
-             ALCOLOR = 0x6b6d;
-             odd_color = 0x630C;
-             even_color = 0x8410;
+             ALCOLOR = 0x301f;
+             odd_color = 0x4a31;
+             even_color = 0x079F;
          }                 },
         {"Red",
          [&]() {
@@ -430,8 +430,8 @@ void setUiColor() {
          [&]() {
              FGCOLOR = 0x94BF;
              BGCOLOR = 0x0000;
-             ALCOLOR = 0xd81f;
-             odd_color = 0xd69f;
+             ALCOLOR = 0x301f;
+             odd_color = 0x4a31;
              even_color = 0x079F;
          }                 },
         {"Yellow",
@@ -649,16 +649,16 @@ void defaultValues() {
     odd_color = 0x5555;
     even_color = 0x2222;
 #else
-    FGCOLOR = 0xFFFF;
+    FGCOLOR = 0x94BF;
     BGCOLOR = 0x0000;
-    ALCOLOR = 0x6b6d;
-    odd_color = 0x630C;
-    even_color = 0x8410;
+    ALCOLOR = 0x301f;
+    odd_color = 0x4a31;
+    even_color = 0x079F;
 #endif
-    dev_mode = false;
+    dev_mode = true;
     wui_usr = "admin";
     wui_pwd = "launcher";
-    dwn_path = "/downloads/";
+    dwn_path = "/";
 #if defined(HEADLESS)
     // SD Pins
     _miso = 0;

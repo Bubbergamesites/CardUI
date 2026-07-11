@@ -482,7 +482,7 @@ void setUiColor() {
              even_color = 0xb596;
         }                  },
        {"Modern Glass",   [&]() {
-             FGCOLOR = 0xea08;
+             FGCOLOR = 0xf800;
              BGCOLOR = 0x967c;
              ALCOLOR = 0x4c37;
              odd_color = 0xffff;

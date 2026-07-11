@@ -415,7 +415,7 @@ void setUiColor() {
              FGCOLOR = 0x00lf;
              BGCOLOR = 0x0000;
              ALCOLOR = 0x075f;
-             odd_color = 0xd69f;
+             odd_color = 0x045f;
              even_color = 0x079F;
          }                 },
         {"Red",
@@ -431,7 +431,7 @@ void setUiColor() {
              FGCOLOR = 0x00lf;
              BGCOLOR = 0x0000;
              ALCOLOR = 0x075f;
-             odd_color = 0xd69f;
+             odd_color = 0x045f;
              even_color = 0x079F;
          }                 },
         {"Yellow",
@@ -652,7 +652,7 @@ void defaultValues() {
     FGCOLOR = 0x00lf;
     BGCOLOR = 0x0000;
     ALCOLOR = 0x075f;
-    odd_color = 0xd69f;
+    odd_color = 0x045f;
     even_color = 0x079F;
 #endif
     dev_mode = false;

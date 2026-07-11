@@ -426,13 +426,13 @@ void setUiColor() {
              odd_color = 0xFBC0;
              even_color = 0xAAC0;
          }                 },
-        {"Blue",
+        {"Orange",
          [&]() {
-             FGCOLOR = 0x101f;
+             FGCOLOR = 0xFC60;
              BGCOLOR = 0x0000;
-             ALCOLOR = 0x075f;
-             odd_color = 0x045f;
-             even_color = 0x079F;
+             ALCOLOR = 0xfb20;
+             odd_color = 0xFBC0;
+             even_color = 0xAAC0;
          }                 },
         {"Yellow",
          [&]() {
@@ -441,6 +441,22 @@ void setUiColor() {
              ALCOLOR = 0xFB80;
              odd_color = 0x9480;
              even_color = 0xbae0;
+         }                 },
+        {"Green",
+         [&]() {
+             FGCOLOR = 0x07E0;
+             BGCOLOR = 0x0000;
+             ALCOLOR = 0xF800;
+             odd_color = 0x30c5;
+             even_color = 0x32e5;
+         }                 },
+        {"Blue",
+         [&]() {
+             FGCOLOR = 0x101f;
+             BGCOLOR = 0x0000;
+             ALCOLOR = 0x075f;
+             odd_color = 0x045f;
+             even_color = 0x079F;
          }                 },
         {"Purple",
          [&]() {
@@ -464,6 +480,27 @@ void setUiColor() {
              ALCOLOR = 0x6b6d;
              odd_color = 0x8c71;
              even_color = 0xb596;
+        }                  },
+       {"Modern Glass",   [&]() {
+             FGCOLOR = 0x6356;
+             BGCOLOR = 0x967c;
+             ALCOLOR = 0xea08;
+             odd_color = 0xffff;
+             even_color = 0xb596;
+        }                  },
+       {"Bubber :)",   [&]() {
+             FGCOLOR = 0x07e5;
+             BGCOLOR = 0x881f;
+             ALCOLOR = 0x0000;
+             odd_color = 0xc01f;
+             even_color = 0x1627;
+        }                  },
+       {"CardPuter",   [&]() {
+             FGCOLOR = 0x1627;
+             BGCOLOR = 0xffff;
+             ALCOLOR = 0x07ea;
+             odd_color = 0x52ab;
+             even_color = 0xfc80;
          }},
     };
     loopOptions(options);

@@ -412,7 +412,7 @@ void setUiColor() {
     options = {
         {"Default",
          [&]() {
-             FGCOLOR = 0x10lf;
+             FGCOLOR = 0x101f;
              BGCOLOR = 0x0000;
              ALCOLOR = 0x075f;
              odd_color = 0x045f;
@@ -428,7 +428,7 @@ void setUiColor() {
          }                 },
         {"Blue",
          [&]() {
-             FGCOLOR = 0x10lf;
+             FGCOLOR = 0x101f;
              BGCOLOR = 0x0000;
              ALCOLOR = 0x075f;
              odd_color = 0x045f;
@@ -649,7 +649,7 @@ void defaultValues() {
     odd_color = 0x5555;
     even_color = 0x2222;
 #else
-    FGCOLOR = 0x10lf;
+    FGCOLOR = 0x101f;
     BGCOLOR = 0x0000;
     ALCOLOR = 0x075f;
     odd_color = 0x045f;

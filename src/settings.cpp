@@ -501,6 +501,13 @@ void setUiColor() {
              ALCOLOR = 0x07ea;
              odd_color = 0x52ab;
              even_color = 0x07eb;
+       }                   },
+      {"M5Stack",   [&]() {
+             FGCOLOR = 0x015f;
+             BGCOLOR = 0xffff;
+             ALCOLOR = 0xfde0;
+             odd_color = 0x52ab;
+             even_color = 0x7c1e;
          }},
     };
     loopOptions(options);

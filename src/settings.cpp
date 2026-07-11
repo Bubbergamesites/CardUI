@@ -482,25 +482,25 @@ void setUiColor() {
              even_color = 0xb596;
         }                  },
        {"Modern Glass",   [&]() {
-             FGCOLOR = 0x6356;
+             FGCOLOR = 0xea08;
              BGCOLOR = 0x967c;
-             ALCOLOR = 0xea08;
+             ALCOLOR = 0x4c37;
              odd_color = 0xffff;
              even_color = 0xb596;
         }                  },
        {"Bubber :)",   [&]() {
              FGCOLOR = 0x07e5;
-             BGCOLOR = 0x881f;
+             BGCOLOR = 0xb81f;
              ALCOLOR = 0x0000;
              odd_color = 0xc01f;
              even_color = 0x1627;
         }                  },
        {"CardPuter",   [&]() {
-             FGCOLOR = 0x1627;
+             FGCOLOR = 0xfc60;
              BGCOLOR = 0xffff;
              ALCOLOR = 0x07ea;
              odd_color = 0x52ab;
-             even_color = 0xfc80;
+             even_color = 0x07eb;
          }},
     };
     loopOptions(options);

@@ -199,52 +199,6 @@ void initDisplay(bool doAll) {
     show = launcherRandom(0, 40);
     _x = tft->getCursorX();
     _y = tft->getCursorY();
-
-    while (tft->getCursorY() < (tftHeight - (LH + 4))) {
-        cor = launcherRandom(0, 11);
-        tft->setTextSize(FP);
-        show = launcherRandom(0, 40);
-        if (show == 0 || doAll) {
-            if (cor == 10) {
-                txt = " ";
-            } else if (cor & 1) {
-                tft->setTextColor(odd_color, BGCOLOR);
-                txt = String(cor);
-            } else {
-                tft->setTextColor(even_color, BGCOLOR);
-                txt = String(cor);
-            }
-
-            if (_x >= (tftWidth - (LW * FP + 4))) {
-                _x = 10;
-                _y += LH * FP;
-            } else if (_x < 10) {
-                _x = 10;
-            }
-            if (_y >= (tftHeight - (LH * FP + LH * FP / 2))) break;
-            tft->setCursor(_x, _y);
-            if (_y > (tftHeight - (LH * FM + LH * FP / 2)) &&
-                _x >= (tftWidth - ((LW * FP + 4) + LW * FP * name.length()))) {
-                tft->setTextColor(FGCOLOR);
-                tft->print(name);
-                _x += LW * FP * name.length();
-            } else {
-                tft->print(txt);
-                _x += LW * FP;
-            }
-        } else {
-            if (_y > (tftHeight - (LH * FM + LH * FP / 2)) &&
-                _x >= (tftWidth - ((LW * FP + 4) + LW * FP * name.length())))
-                _x += LW * FP * name.length();
-            else _x += LW * FP;
-
-            if (_x >= (tftWidth - (LW * FP + 4))) {
-                _x = 10;
-                _y += LH * FP;
-            }
-        }
-        tft->setCursor(_x, _y);
-    }
     tft->setTextSize(FG);
     tft->setTextColor(FGCOLOR);
 #if TFT_HEIGHT > 200

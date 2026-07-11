@@ -428,9 +428,9 @@ void setUiColor() {
          }                 },
         {"Blue",
          [&]() {
-             FGCOLOR = 0x94BF;
+             FGCOLOR = 0x00lf;
              BGCOLOR = 0x0000;
-             ALCOLOR = 0xd81f;
+             ALCOLOR = 0x075f;
              odd_color = 0xd69f;
              even_color = 0x079F;
          }                 },
